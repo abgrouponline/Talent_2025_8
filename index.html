@@ -160,52 +160,96 @@
                 const doc = parser.parseFromString(html, 'text/html');
                 const bodyContent = doc.body.innerHTML;
                 
-                // Display the content
-                contentDiv.innerHTML = `
-                    <div style="padding: 20px; max-height: calc(100vh - 200px); overflow-y: auto; background: white; border-radius: 10px;">
-                        ${bodyContent}
-                    </div>
-                `;
+                                 // Display the content with better styling isolation
+                 contentDiv.innerHTML = `
+                     <div style="padding: 20px; max-height: calc(100vh - 200px); overflow-y: auto; background: white; border-radius: 10px; position: relative;">
+                         <div style="position: relative; z-index: 1;">
+                             ${bodyContent}
+                         </div>
+                     </div>
+                 `;
+                 
+                 // Add CSS to isolate proposal content styling
+                 const style = document.createElement('style');
+                 style.textContent = `
+                     #proposal-content * {
+                         font-family: inherit !important;
+                         box-sizing: border-box !important;
+                     }
+                     #proposal-content {
+                         background: white !important;
+                         color: #333 !important;
+                     }
+                     #proposal-content h1, #proposal-content h2, #proposal-content h3 {
+                         color: #667eea !important;
+                         margin-bottom: 15px !important;
+                     }
+                     #proposal-content p {
+                         line-height: 1.6 !important;
+                         margin-bottom: 10px !important;
+                     }
+                     #proposal-content ul, #proposal-content ol {
+                         margin-left: 20px !important;
+                         margin-bottom: 15px !important;
+                     }
+                     #proposal-content li {
+                         margin-bottom: 5px !important;
+                     }
+                     #proposal-content .card, #proposal-content .section {
+                         background: #f8f9fa !important;
+                         padding: 15px !important;
+                         border-radius: 8px !important;
+                         margin-bottom: 15px !important;
+                     }
+                 `;
+                 document.head.appendChild(style);
                 
             } catch (error) {
                 console.error('Error loading proposal:', error);
                 
-                // Fallback: Show proposal details and download link
-                contentDiv.innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <h2 style="color: #667eea; margin-bottom: 20px;">${proposal.title}</h2>
-                        
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: left;">
-                            <h4>📋 Proposal Details:</h4>
-                            <ul style="margin-top: 10px;">
-                                <li><strong>File:</strong> ${proposal.file}</li>
-                                <li><strong>Size:</strong> ${proposal.size}</li>
-                                <li><strong>Lines:</strong> ${proposal.lines}</li>
-                                <li><strong>Client:</strong> ${proposal.client}</li>
-                                <li><strong>Category:</strong> ${proposal.category}</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: #e8f4fd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                            <h4>📄 Proposal Description:</h4>
-                            <p style="margin-top: 10px; line-height: 1.6;">${proposal.description}</p>
-                        </div>
-                        
-                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                            <button onclick="window.open('${proposal.file}', '_blank')" style="background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
-                                📄 Open Full Proposal
-                            </button>
-                            <button onclick="downloadFile('${proposal.file}')" style="background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
-                                💾 Download Proposal
-                            </button>
-                        </div>
-                        
-                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
-                            💡 <strong>Tip:</strong> Click "Open Full Proposal" to view the complete document in a new tab, 
-                            or "Download Proposal" to save it to your device.
-                        </p>
-                    </div>
-                `;
+                                 // Fallback: Show proposal details and download link
+                 contentDiv.innerHTML = `
+                     <div style="text-align: center; padding: 40px;">
+                         <h2 style="color: #667eea; margin-bottom: 20px;">${proposal.title}</h2>
+                         
+                         <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: left;">
+                             <h4>📋 Proposal Details:</h4>
+                             <ul style="margin-top: 10px;">
+                                 <li><strong>File:</strong> ${proposal.file}</li>
+                                 <li><strong>Size:</strong> ${proposal.size}</li>
+                                 <li><strong>Lines:</strong> ${proposal.lines}</li>
+                                 <li><strong>Client:</strong> ${proposal.client}</li>
+                                 <li><strong>Category:</strong> ${proposal.category}</li>
+                             </ul>
+                         </div>
+                         
+                         <div style="background: #e8f4fd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                             <h4>📄 Proposal Description:</h4>
+                             <p style="margin-top: 10px; line-height: 1.6;">${proposal.description}</p>
+                         </div>
+                         
+                         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                             <button onclick="window.open('${proposal.file}', '_blank')" style="background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                                 📄 Open Full Proposal
+                             </button>
+                             <button onclick="downloadFile('${proposal.file}')" style="background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                                 💾 Download Proposal
+                             </button>
+                         </div>
+                         
+                         <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                             💡 <strong>Tip:</strong> Click "Open Full Proposal" to view the complete document in a new tab, 
+                             or "Download Proposal" to save it to your device.
+                         </p>
+                         
+                         <div style="margin-top: 30px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+                             <p style="margin: 0; color: #856404; font-size: 0.9em;">
+                                 <strong>Note:</strong> The original proposal styling may appear differently when embedded. 
+                                 For the best viewing experience, use "Open Full Proposal" to see the document in its original format.
+                             </p>
+                         </div>
+                     </div>
+                 `;
             }
         }
 
