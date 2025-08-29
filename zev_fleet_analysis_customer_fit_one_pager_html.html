@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZEV Fleet Analysis – Solution Fit Checker</title>
+  <style>
+    :root{
+      --bg:#0b1017;--card:#121826;--muted:#2a3446;--accent:#4f8cff;--text:#e6eefc;--sub:#a4b3cc;--good:#00c781;--warn:#ffbf00;--bad:#ff5a5f
+    }
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1017 0%,#0f1725 100%);color:var(--text)}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(79,140,255,.12);color:var(--accent);border:1px solid rgba(79,140,255,.35);padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px;letter-spacing:.35px;text-transform:uppercase}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px}
+    h1{font-size:38px;line-height:1.1;margin:12px 0 10px}
+    h2{font-size:22px;margin:0 0 8px}
+    p{color:var(--sub);line-height:1.6}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+    .kpi{background:var(--card);border:1px solid rgba(255,255,255,.06);padding:16px;border-radius:16px}
+    .kpi .val{font-size:24px;font-weight:800}
+    .kpi .lbl{font-size:12px;color:var(--sub)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .col-7{grid-column:span 7}
+    .col-5{grid-column:span 5}
+    .col-12{grid-column:span 12}
+    .pill{display:inline-block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
+    .list{margin:0;padding:0;list-style:none}
+    .list li{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:7px}
+    .muted{color:var(--sub)}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:22px 0}
+    .btn{appearance:none;border:none;background:var(--accent);color:white;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.2)}
+    .support{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .support .it{background:var(--card);border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:14px}
+    .scoreWrap{display:flex;align-items:center;gap:12px}
+    .meter{flex:1;height:14px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.14)}
+    .bar{height:100%;width:0;background:linear-gradient(90deg,var(--bad),var(--warn),var(--good));transition:width .35s ease}
+    .mini{font-size:12px;color:var(--sub)}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{border-bottom:1px dashed rgba(255,255,255,.12);padding:10px;text-align:left}
+    .ok{color:var(--good);font-weight:700}
+    .no{color:var(--bad);font-weight:700}
+    .warn{color:var(--warn);font-weight:700}
+    .foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18)}
+    .monospace{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#0e1624;border:1px solid rgba(255,255,255,.08);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--sub)}
+    .tag .dot{background:var(--muted)}
+    .checklist label{display:flex;gap:12px;align-items:flex-start;margin:9px 0;cursor:pointer}
+    .checklist input{margin-top:2px}
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .col-7,.col-5,.col-12{grid-column:span 1}
+      .kpis{grid-template-columns:1fr}
+      .support{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero card">
+      <div>
+        <span class="badge">Zero‑Emission Fleet Analysis</span>
+        <h1>Check Solution Fit<br/><span class="muted">for your EV/FCV transition</span></h1>
+        <p>
+          This page helps you verify whether our off‑the‑shelf platform meets your operational and procurement needs.
+          Walk through the checklist and scenario capabilities, then export a summary to share with your team.
+        </p>
+        <div class="kpis">
+          <div class="kpi"><div class="val" id="fitVal">0%</div><div class="lbl">Current fit score</div></div>
+          <div class="kpi"><div class="val">6 weeks</div><div class="lbl">Go‑live timeline incl. training</div></div>
+          <div class="kpi"><div class="val">5+ users</div><div class="lbl">Licence bundle (transferable)</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="scoreWrap">
+          <div class="meter" aria-label="Fit score"><div class="bar" id="bar"></div></div>
+          <button class="btn" id="btnExport" title="Save a PDF summary">Export summary</button>
+        </div>
+        <p class="mini">Tip: toggle the checklist items that reflect your needs. The score updates automatically.</p>
+      </div>
+      <div class="card">
+        <h2>At‑a‑glance capabilities</h2>
+        <div>
+          <span class="pill">Peak Vehicle Requirement (PVR)</span>
+          <span class="pill">Depot & Opportunity Charging</span>
+          <span class="pill">Route/Duty Cycle Simulation</span>
+          <span class="pill">Charger & Grid Load Sizing</span>
+          <span class="pill">Scenario Planning</span>
+          <span class="pill">GIS Mapping</span>
+          <span class="pill">SSO (Azure AD / SAML / OIDC)</span>
+          <span class="pill">CSV/Excel/GTFS Imports</span>
+          <span class="pill">Docs, Training & Helpdesk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid">
+      <section class="col-7 card">
+        <h2>Procurement fit checklist</h2>
+        <p class="muted">Select what you require. We’ll show how the platform maps to each item.</p>
+        <form class="checklist" id="fitForm">
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Off‑the‑shelf system</strong> (no custom build; configurable)</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>5+ licences</strong> with transferability between staff</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Training</strong> delivered via Teams/in‑person, completed within 6 weeks</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Ad‑hoc support</strong> with <em>initial weekday response within 24h</em></span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Single Sign‑On</strong> using corporate email domains (Azure AD / SAML / OIDC)</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Peak Vehicle Requirement</strong> calculation from service schedules</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Charging requirements</strong>: depot & on‑route opportunity charging</span></label>
+          <label><input type="checkbox" data-weight="10" checked> <span><strong>Charger siting</strong> & <strong>GIS mapping</strong> of candidate locations</span></label>
+          <label><input type="checkbox" data-weight="5" checked> <span><strong>Data import</strong> via CSV/Excel/GTFS; API connectors optional</span></label>
+          <label><input type="checkbox" data-weight="5" checked> <span><strong>Knowledge base</strong>, guides, and workshop materials (electronic)</span></label>
+        </form>
+        <div class="divider"></div>
+        <div>
+          <button class="btn" id="btnContact">Request a tailored demo</button>
+          <button class="btn secondary" id="btnPrint">Print / Save as PDF</button>
+        </div>
+      </section>
+
+      <section class="col-5 card">
+        <h2>How the platform maps to your needs</h2>
+        <ul class="list">
+          <li><span class="dot"></span><div>
+            <strong>Duty cycle & route simulation</strong>
+            <div class="muted">Model timetables, layovers, topography, weather sensitivity, and interlining to predict energy use & SoC.</div>
+          </div></li>
+          <li><span class="dot"></span><div>
+            <strong>Charging strategy</strong>
+            <div class="muted">Size depot chargers and evaluate on‑route opportunity charging with dwell constraints and grid capacity.</div>
+          </div></li>
+          <li><span class="dot"></span><div>
+            <strong>PVR & resource planning</strong>
+            <div class="muted">Compute peak vehicle requirement and charger counts across scenarios and phased transitions.</div>
+          </div></li>
+          <li><span class="dot"></span><div>
+            <strong>Identity & security</strong>
+            <div class="muted">SSO via Azure AD / Okta / any SAML or OIDC provider; role‑based access; audit trails.</div>
+          </div></li>
+          <li><span class="dot"></span><div>
+            <strong>Go‑live in 6 weeks</strong>
+            <div class="muted">Week 0–1: kick‑off & data import · Week 2–3: configuration & SSO · Week 4–5: training · Week 6: handover.</div>
+          </div></li>
+        </ul>
+      </section>
+
+      <section class="col-12 card">
+        <h2>Implementation timeline (example)</h2>
+        <table class="table monospace">
+          <thead><tr><th>Week</th><th>Milestone</th><th>Deliverables</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>0–1</td><td>Mobilisation</td><td>Kick‑off · Data templates · Access & SSO discovery</td><td class="ok">Ready</td></tr>
+            <tr><td>2–3</td><td>Configuration</td><td>Schedules & duty import · Charger catalogues · Scenarios</td><td class="ok">Ready</td></tr>
+            <tr><td>4–5</td><td>Training</td><td>Two‑hour workshops (Teams/in‑person) · Materials</td><td class="ok">Ready</td></tr>
+            <tr><td>6</td><td>Go‑Live</td><td>Admin handover · Support SLAs · Licence transfers enabled</td><td class="ok">Ready</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="col-7 card">
+        <h2>Support & training</h2>
+        <div class="support">
+          <div class="it"><strong>Workshops</strong><div class="muted">Two‑hour sessions covering data import, scenario setup, and reporting. Electronic materials included.</div></div>
+          <div class="it"><strong>Helpdesk</strong><div class="muted">Initial response within 24h (Mon–Fri). Escalation paths & knowledge base access.</div></div>
+          <div class="it"><strong>Ad‑hoc support</strong><div class="muted">On‑demand expert hours for modelling assistance. Hourly rate provided in proposal.</div></div>
+        </div>
+      </section>
+
+      <section class="col-5 card">
+        <h2>Data & integration</h2>
+        <ul class="list">
+          <li><span class="dot"></span><div><strong>Imports</strong><div class="muted">CSV/Excel, GTFS timetables, basic GIS.</div></div></li>
+          <li><span class="dot"></span><div><strong>SSO</strong><div class="muted">Azure AD, Okta, ADFS, Google Workspace via SAML/OIDC.</div></div></li>
+          <li><span class="dot"></span><div><strong>Security</strong><div class="muted">Encryption in transit & at rest; role‑based permissions; audit logs.</div></div></li>
+        </ul>
+        <div class="divider"></div>
+        <div class="tag"><span class="dot"></span> Licence term: 1 year (+1 +1 options)</div>
+      </section>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="foot">
+      <div>
+        <span class="chip">Minimum 5 licences</span>
+        <span class="chip">Transferable seats</span>
+        <span class="chip">Teams & on‑site training</span>
+        <span class="chip">24h weekday response</span>
+        <span class="chip">Depot & opportunity charging</span>
+      </div>
+      <div>
+        <button class="btn" id="btnEmail">Contact sales</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fit score calculator
+    const form = document.getElementById('fitForm');
+    const bar = document.getElementById('bar');
+    const fitVal = document.getElementById('fitVal');
+    function calc(){
+      const boxes = [...form.querySelectorAll('input[type="checkbox"]')];
+      const total = boxes.reduce((s,b)=>s+Number(b.dataset.weight||0),0);
+      const checked = boxes.filter(b=>b.checked);
+      const score = Math.round(100 * checked.reduce((s,b)=>s+Number(b.dataset.weight||0),0) / Math.max(1,total));
+      bar.style.width = score + '%';
+      fitVal.textContent = score + '%';
+    }
+    form.addEventListener('change', calc); calc();
+
+    // Export summary (simple: print to PDF)
+    document.getElementById('btnExport').addEventListener('click',()=>window.print());
+    document.getElementById('btnPrint').addEventListener('click',()=>window.print());
+
+    // Contact buttons (open mailto draft)
+    document.getElementById('btnEmail').addEventListener('click',()=>{
+      const subj = encodeURIComponent('ZEV Fleet Analysis – Demo Request');
+      const body = encodeURIComponent([
+        'Hi,',
+        '',
+        'We would like a tailored demonstration of the ZEV Fleet Analysis platform.',
+        'Key needs:',
+        '- Off-the-shelf configuration',
+        '- 5+ transferable licences',
+        '- SSO with our domain',
+        '- Training within 6 weeks',
+        '- Ad-hoc support & hourly rate',
+        '',
+        'Please contact us to schedule.',
+        'Regards,'
+      ].join('\n'));
+      window.location.href = `mailto:sales@example.com?subject=${subj}&body=${body}`;
+    });
+
+    // Demo CTA
+    document.getElementById('btnContact').addEventListener('click',()=>{
+      const subj = encodeURIComponent('Request a tailored demo – ZEV Fleet Analysis');
+      const body = encodeURIComponent('Hello, we would like to see a demo aligned to our routes, charging strategy, and PVR requirements.');
+      window.location.href = `mailto:sales@example.com?subject=${subj}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
