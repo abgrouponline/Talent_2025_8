@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Regulation Order (TRO) Management System Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: #004080;
+        }
+        section {
+            padding: 20px 40px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .phase {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-left: 5px solid #004080;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #e0e0e0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Proposal: Traffic Regulation Order (TRO) Management System</h1>
+    <p>Reference: Proc 24-239</p>
+</header>
+
+<section>
+    <h2>Understanding of Requirements</h2>
+    <p>We have carefully reviewed Wrexham County Borough Council's requirements for a modern TRO Management System. Our solution fully addresses the need for a cloud-based, user-friendly system that can manage permanent, temporary, and experimental Traffic Regulation Orders, Off Street Parking Orders, and Moving Traffic Orders while supporting asset management, mapping, compliance, and workflow automation.</p>
+    
+    <h3>Key Functional Capabilities:</h3>
+    <ul>
+        <li>Create, edit, and manage TROs with full version control and amendment history.</li>
+        <li>Record and maintain non-TRO assets including pedestrian crossings, bus stop clearways, and box junctions.</li>
+        <li>Track locations of network assets such as EV charging points and pay-and-display machines.</li>
+        <li>Standardized consultation planning workflows with stakeholder feedback tracking.</li>
+        <li>Document generation compliant with Department of Transport standards and Road Traffic Act, adaptable to future legislation.</li>
+        <li>User-friendly interface designed for minimal training and high productivity.</li>
+        <li>Hosted/SaaS deployment for cloud accessibility and scalability.</li>
+        <li>Role-based access control and configurable permissions for system administrators.</li>
+        <li>Integration capabilities with other asset management systems or municipal applications.</li>
+        <li>Optional TRO design and proposal support packages to assist Road Network Officers.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Proposed Technology Stack</h2>
+    <h3>Backend & API</h3>
+    <ul>
+        <li>Programming Language: Python (Django) or Java (Spring Boot)</li>
+        <li>Database: PostgreSQL with PostGIS for geospatial data</li>
+        <li>RESTful API / GraphQL for integration with third-party applications</li>
+    </ul>
+
+    <h3>Frontend & User Interface</h3>
+    <ul>
+        <li>Web-based interface: React.js or Angular for intuitive dashboards</li>
+        <li>Mapping: Leaflet or Mapbox for geospatial visualization of TROs and assets</li>
+        <li>Responsive design for desktop and mobile access</li>
+    </ul>
+
+    <h3>Hosting & Cloud Infrastructure</h3>
+    <ul>
+        <li>Cloud platforms: AWS or Microsoft Azure for SaaS deployment</li>
+        <li>Containerization: Docker/Kubernetes for scalability and maintainability</li>
+        <li>Secure user authentication and role-based access control (OAuth2, SAML)</li>
+    </ul>
+
+    <h3>Document Management & Compliance</h3>
+    <ul>
+        <li>PDF generation libraries for official documents (PDFKit, ReportLab)</li>
+        <li>Version tracking for audit and legislative compliance</li>
+    </ul>
+
+    <h3>Integration & Workflow Automation</h3>
+    <ul>
+        <li>APIs for asset management or council systems</li>
+        <li>Optional workflow engine for consultation and approval process</li>
+        <li>Email and notification services for stakeholder communication</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Project Roadmap</h2>
+    <div class="roadmap">
+        <div class="phase">
+            <h3>Phase 1: Discovery & Requirements Refinement</h3>
+            <p>Engage with stakeholders to finalize functional requirements, map data sources, and design system workflows.</p>
+        </div>
+        <div class="phase">
+            <h3>Phase 2: System Architecture & Design</h3>
+            <p>Develop cloud-based architecture, database schema, GIS integration, and UI/UX design for ease of use.</p>
+        </div>
+        <div class="phase">
+            <h3>Phase 3: Development & Integration</h3>
+            <p>Build backend, frontend, APIs, mapping modules, and document generation tools; integrate with existing council systems as required.</p>
+        </div>
+        <div class="phase">
+            <h3>Phase 4: Testing & Validation</h3>
+            <p>Conduct comprehensive unit, integration, and user acceptance testing to ensure compliance with DfT standards and Road Traffic Act.</p>
+        </div>
+        <div class="phase">
+            <h3>Phase 5: Deployment & Training</h3>
+            <p>Deploy the solution on cloud infrastructure, configure user permissions, and provide training for all council staff.</p>
+        </div>
+        <div class="phase">
+            <h3>Phase 6: Support & Continuous Improvement</h3>
+            <p>Offer ongoing support, system updates, and optional TRO design consultation packages.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Prepared by Abgrouponline | Contact: [Your Email] | Date: 24th August 2025</p>
+</footer>
+
+</body>
+</html>

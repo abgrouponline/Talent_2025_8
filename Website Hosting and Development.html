@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weston College Website Project Proposal</title>
+<style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
+    header { background: linear-gradient(90deg,#004080,#0066cc); color: #fff; padding: 40px 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5em; }
+    header p { font-size: 1.2em; }
+    section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+    h2 { color: #004080; text-align: center; margin-bottom: 40px; font-size: 2em; }
+    .grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .card { background: #fff; border-radius: 12px; padding: 25px; flex: 1 1 280px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { color: #0066cc; margin-top: 0; }
+    .priority { font-weight: bold; padding: 4px 8px; border-radius: 6px; color: #fff; font-size: 0.9em; }
+    .must { background: #d32f2f; }
+    .should { background: #f57c00; }
+    .could { background: #1976d2; }
+    .would { background: #388e3c; }
+    .roadmap-step { background: #e6f2ff; padding: 25px; border-left: 8px solid #004080; margin-bottom: 20px; border-radius: 8px; }
+    footer { background: #004080; color: #fff; text-align: center; padding: 30px 20px; }
+    svg { display: block; margin: 20px auto; max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Weston College Website Project Proposal</h1>
+    <p>Visual Implementation Plan | Technology Stack | Deliverables | MoSCoW Priorities</p>
+</header>
+
+<section>
+    <h2>Project Understanding</h2>
+    <p>We fully understand Weston College’s objectives to provide a seamless, mobile-friendly, and accessible user experience across multiple websites. Our solution addresses all operational requirements, ensuring:</p>
+    <ul>
+        <li><strong>Seamless customer journey:</strong> From course discovery to application, enrollment, and payment.</li>
+        <li><strong>Single source of truth:</strong> Centralized course information managed via API integration.</li>
+        <li><strong>Content & events showcase:</strong> Dynamic updates for news and events.</li>
+        <li><strong>Audience insights:</strong> Analytics dashboards for actionable insights.</li>
+        <li><strong>Accessibility & mobile-first:</strong> Fully compliant with WCAG 2.1 standards.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Technology Stack</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Frontend</h3>
+            <ul>
+                <li>HTML5, CSS3, JavaScript (ES6+)</li>
+                <li>React.js / Vue.js for dynamic components</li>
+                <li>Mobile-first, WCAG 2.1 compliant</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Backend & CMS</h3>
+            <ul>
+                <li>Drupal CMS (latest version)</li>
+                <li>PHP 8.x, MySQL / MariaDB</li>
+                <li>RESTful API integration with Tribal</li>
+                <li>Content versioning & workflow management</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Hosting & Infrastructure</h3>
+            <ul>
+                <li>AWS Cloud hosting & server management</li>
+                <li>SSL, backups, disaster recovery</li>
+                <li>Monitoring & performance optimization</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Analytics & Insights</h3>
+            <ul>
+                <li>Google Analytics / GA4 dashboards</li>
+                <li>Heatmaps, user behavior tracking</li>
+                <li>Custom reports for marketing and course teams</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Implementation Roadmap</h2>
+    <div class="roadmap-step">
+        <h3>Step 1: Discovery & Requirements</h3>
+        <p>Workshops with stakeholders to confirm Must-Have, Should-Have, and optional requirements. Align on project objectives, KPIs, and timelines.</p>
+    </div>
+    <div class="roadmap-step">
+        <h3>Step 2: Design & Prototyping</h3>
+        <p>Wireframes, prototypes, and accessible design for approval. Mobile-first design with responsive layouts.</p>
+    </div>
+    <div class="roadmap-step">
+        <h3>Step 3: Development & Integration</h3>
+        <p>Implement frontend & backend, API integration, CMS configuration, and content migration from incumbent supplier.</p>
+    </div>
+    <div class="roadmap-step">
+        <h3>Step 4: Testing & QA</h3>
+        <p>Functional testing, accessibility audits, performance testing, and cross-browser validation.</p>
+    </div>
+    <div class="roadmap-step">
+        <h3>Step 5: Deployment & Handover</h3>
+        <p>Go-live with comprehensive documentation, training for internal staff, and support handover plan.</p>
+    </div>
+    <div class="roadmap-step">
+        <h3>Step 6: Ongoing Support & Analytics</h3>
+        <p>Maintenance, server hosting, content updates, and analytics dashboards for continuous improvement.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Deliverables & MoSCoW Priorities</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Seamless UX & Accessibility <span class="priority must">MUST</span></h3>
+            <p>Fully responsive, mobile-first, and WCAG 2.1 compliant design ensuring an intuitive experience.</p>
+        </div>
+        <div class="card">
+            <h3>Course Information M <span class="priority must">MUST</span></h3>
+            <p>Centralized course API integration to act as a single source of truth across all platforms.</p>
+        </div>
+        <div class="card">
+            <h3>News & Event Updates <span class="priority should">SHOULD</span></h3>
+            <p>Dynamic content management tools allowing marketing team to quickly update events and announcements.</p>
+        </div>
+        <div class="card">
+            <h3>Analytics & Insights <span class="priority should">SHOULD</span></h3>
+            <p>Advanced reporting dashboards and user behavior analysis for marketing and strategic planning.</p>
+        </div>
+        <div class="card">
+            <h3>Documentation & Training <span class="priority could">COULD</span></h3>
+            <p>Comprehensive handover documents and staff training materials for internal teams.</p>
+        </div>
+        <div class="card">
+            <h3>Optional Enhancements <span class="priority would">WOULD</span></h3>
+            <p>Future integrations, chatbots, or personalized user experiences.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Abgrouponline. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
